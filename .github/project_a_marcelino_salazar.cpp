@@ -2,6 +2,7 @@
 #include <fstream> //this is the file library. it is used to read from files and write to files using ifstream & ofstream classes
 #include <sstream> //this is the string stream library. it is used to split and parse strings using stringstream class.
 #include <string> //this is the string library for string class.
+#include "SortTracker.h"
 
 using namespace std; //tells compiler to make all classes, objects and functions available from std.
 
@@ -320,8 +321,11 @@ int main() {
     
     } else if (option == 4) {
         viewClients.removeClient();
-
+    
     } else if (option == 5) {
+        viewClients.sortClients();
+
+    } else if (option == 6) {
         cout << "Closing...";
         break;
     
