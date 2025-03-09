@@ -126,6 +126,12 @@ public:
         delete[] clientFile;
     }
 
+    void sortClients() { //this wrapper function to declare sorttracker calls quicksort.
+        SortTracker tracker;
+        QuickSort(clientFile, 0, capacity - 1, tracker);
+        fullprint();
+    }
+
     void loadfile() {
         ifstream file("bank_full.csv"); //this declares a ifstream class named "file" to open the external file bank_full.csv.
         if (!file) {
@@ -332,7 +338,7 @@ int main() {
     cout << "4. Remove client file" << endl;
     cout << "5. Sort" << endl;
     cout << "6. Quit" << endl;
-    cout << "Enter option (1,2,3,4,5): ";
+    cout << "Enter option (1,2,3,4,5,6): ";
     int option;
     cin >> option;
     cout << "-----------------------" << endl;
@@ -355,6 +361,8 @@ int main() {
     
     } else if (option == 5) {
         viewClients.sortClients();
+        cout << "Clients sorted:\n";
+        viewClients.fullprint();
 
     } else if (option == 6) {
         cout << "Closing...";
