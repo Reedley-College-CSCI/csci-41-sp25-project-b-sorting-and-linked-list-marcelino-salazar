@@ -336,7 +336,7 @@ int main() {
     cout << "2. Search ID" << endl;
     cout << "3. Add new client file" << endl;
     cout << "4. Remove client file" << endl;
-    cout << "5. Sort" << endl;
+    cout << "5. Sort Descending (highest to lowest balance)" << endl;
     cout << "6. Quit" << endl;
     cout << "Enter option (1,2,3,4,5,6): ";
     int option;
