@@ -87,6 +87,36 @@ private:
     AllClientData* clientFile; //this declares a pointer named "clientFile".
     int capacity;
 
+    //this function divides the array into low and high
+    int Partition(AllClientData* clientBalance, int lowIndex, int highIndex, SortTracker& tracker) {
+        int pivot = clientBalance[lowIndex + (highIndex - lowIndex) / 2].clientBankInfo.balance;
+
+        while (true) {
+            while (tracker.IsLT(pivot, clientBalance[lowIndex].clientBankInfo.balance)) {
+                lowIndex++;
+            }
+            while (tracker.IsLT(clientBalance[highIndex].clientBankInfo.balance, pivot)) {
+                highIndex--;
+            }
+
+            if (lowIndex >= highIndex) {
+                return highIndex;
+            }
+
+            swap(clientBalance[lowIndex], clientBalance[highIndex]);
+            lowIndex++;
+            highIndex--;
+        }
+    }
+    //this function impllments the partition function and recursively sorts the array by balance
+    void QuickSort(AllClientData* clients, int lowIndex, int highIndex, SortTracker& tracker) {
+        if (lowIndex >= highIndex) return;
+
+        int partitionIndex = Partition(clients, lowIndex, highIndex, tracker);
+        QuickSort(clients, lowIndex, partitionIndex, tracker);
+        QuickSort(clients, partitionIndex + 1, highIndex, tracker);
+    }
+
 public:
     Clients() { //this constructor calls Clients object parameter in main body and assigns it to cap and capacity
         loadfile();
@@ -300,14 +330,15 @@ int main() {
     cout << "2. Search ID" << endl;
     cout << "3. Add new client file" << endl;
     cout << "4. Remove client file" << endl;
-    cout << "5. Quit" << endl;
+    cout << "5. Sort" << endl;
+    cout << "6. Quit" << endl;
     cout << "Enter option (1,2,3,4,5): ";
     int option;
     cin >> option;
     cout << "-----------------------" << endl;
 
     if (cin.fail()) {
-        cout << "Invalid input. Enter valid input: 1,2,3,4,5" << endl;
+        cout << "Invalid input. Enter valid input: 1,2,3,4,5,6" << endl;
         cout << "-----------------------" << endl;
         
     } else if (option == 1) {
