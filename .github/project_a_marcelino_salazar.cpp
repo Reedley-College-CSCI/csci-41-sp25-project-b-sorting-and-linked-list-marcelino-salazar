@@ -145,7 +145,7 @@ public:
         cin >> option;
 
         SortTracker tracker;
-        bool isAscending = (option == 2); //this assigns isAscending with option 2
+        bool isAscending = (option == 2); //this assigns isAscending if option is 2
 
         if(option == 1 || option == 2) {
         QuickSort(clientFile, 0, capacity - 1, tracker, isAscending);
