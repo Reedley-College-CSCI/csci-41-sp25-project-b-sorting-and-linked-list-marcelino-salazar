@@ -128,7 +128,7 @@ public:
 
     void sortClients() { //this wrapper function to declare sorttracker calls quicksort.
         SortTracker tracker;
-        QuickSort(clientFile, 0, capacity - 1, tracker);
+        QuickSort(clientFile, 0, capacity - 1, tracker); //sorts balance in descending order.
         fullprint();
     }
 
