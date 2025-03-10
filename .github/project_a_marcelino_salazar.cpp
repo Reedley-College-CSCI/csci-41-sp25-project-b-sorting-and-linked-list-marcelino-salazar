@@ -88,15 +88,24 @@ private:
     int capacity;
 
     //this function divides the array into low and high
-    int Partition(AllClientData* clientBalance, int lowIndex, int highIndex, SortTracker& tracker) {
+    int Partition(AllClientData* clientBalance, int lowIndex, int highIndex, SortTracker& tracker, bool isAscending) {
         int pivot = clientBalance[lowIndex + (highIndex - lowIndex) / 2].clientBankInfo.balance;
 
         while (true) {
-            while (tracker.IsLT(pivot, clientBalance[lowIndex].clientBankInfo.balance)) {
-                lowIndex++;
-            }
-            while (tracker.IsLT(clientBalance[highIndex].clientBankInfo.balance, pivot)) {
-                highIndex--;
+            if (isAscending) { //sorts in ascending order.
+                while (tracker.IsLT(clientBalance[lowIndex].clientBankInfo.balance, pivot)) {
+                    lowIndex++;
+                }
+                while (tracker.IsLT(pivot, clientBalance[highIndex].clientBankInfo.balance)) {
+                    highIndex--;
+                }
+            } else { //sorts in descending order.
+                while (tracker.IsLT(pivot, clientBalance[lowIndex].clientBankInfo.balance)) {
+                    lowIndex++;
+                }
+                while (tracker.IsLT(clientBalance[highIndex].clientBankInfo.balance, pivot)) {
+                    highIndex--;
+                }
             }
 
             if (lowIndex >= highIndex) {
@@ -109,12 +118,12 @@ private:
         }
     }
     //this function impllments the partition function and recursively sorts the array by balance
-    void QuickSort(AllClientData* clients, int lowIndex, int highIndex, SortTracker& tracker) {
+    void QuickSort(AllClientData* clients, int lowIndex, int highIndex, SortTracker& tracker, bool isAscending) {
         if (lowIndex >= highIndex) return;
 
-        int partitionIndex = Partition(clients, lowIndex, highIndex, tracker);
-        QuickSort(clients, lowIndex, partitionIndex, tracker);
-        QuickSort(clients, partitionIndex + 1, highIndex, tracker);
+        int partitionIndex = Partition(clients, lowIndex, highIndex, tracker, isAscending);
+        QuickSort(clients, lowIndex, partitionIndex, tracker, isAscending);
+        QuickSort(clients, partitionIndex + 1, highIndex, tracker, isAscending);
     }
 
 public:
@@ -127,9 +136,24 @@ public:
     }
 
     void sortClients() { //this wrapper function to declare sorttracker calls quicksort.
+        int option;
+
+        cout << "Sort by Balance" << endl;
+        cout << "1. Ascending" << endl;
+        cout << "2. Descending" << endl;
+        cout << "Enter an option" << endl;
+        cin >> option;
+
         SortTracker tracker;
-        QuickSort(clientFile, 0, capacity - 1, tracker); //sorts balance in descending order.
+        bool isAscending = (option == 2); //this assigns isAscending with option 2
+
+        if(option == 1 || option == 2) {
+        QuickSort(clientFile, 0, capacity - 1, tracker, isAscending);
+        cout << "Result: " << endl;
         fullprint();
+        } else {
+            cout << "Invalid option. Enter 1 or 2" << endl;
+        }
     }
 
     void loadfile() {
