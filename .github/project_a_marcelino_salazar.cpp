@@ -139,8 +139,8 @@ public:
         int option;
 
         cout << "Sort by Balance" << endl;
-        cout << "1. Ascending" << endl;
-        cout << "2. Descending" << endl;
+        cout << "1. Descending" << endl;
+        cout << "2. Ascending" << endl;
         cout << "Enter an option" << endl;
         cin >> option;
 
