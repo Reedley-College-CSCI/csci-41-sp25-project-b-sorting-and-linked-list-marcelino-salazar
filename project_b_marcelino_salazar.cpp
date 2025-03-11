@@ -1,3 +1,6 @@
+/*g++ project_b_marcelino_salazar.cpp clients.cpp -o project_b_marcelino_salazar
+./project_b_marcelino_salazar*/
+
 #include <iostream>
 #include "clients.h"
 #include "SortTracker.h"
