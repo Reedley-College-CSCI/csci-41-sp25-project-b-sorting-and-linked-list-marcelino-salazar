@@ -6,8 +6,11 @@ Clients::Clients() {
     loadfile();
 }
 
-Clients::~Clients() {
+Clients::~Clients() { //
+    if (clientFile) {
     delete[] clientFile;
+    clientFile = nullptr;
+    }
 }
 
 //this function divides the array into low and high
@@ -74,7 +77,8 @@ void Clients::sortClients() {
 void Clients::loadfile() {
     ifstream file("bank_full.csv"); //this declares a ifstream class named "file" to open the external file bank_full.csv.
     if (!file) {
-        cout << "Error. Could not open file.";
+        cout << "Error. Could not open file." << endl;
+        return;
     }
     
     string line; //this declares a string class object named "line" to store values.
@@ -87,6 +91,11 @@ void Clients::loadfile() {
     file.clear(); //this resets the reading position
     file.seekg(0);
     getline(file, line);
+
+    if (clientFile != nullptr) { 
+        delete[] clientFile;
+        clientFile = nullptr;
+    }
 
     clientFile = new AllClientData[totalClients];
     capacity = totalClients;
