@@ -103,4 +103,11 @@ class Clients { //here I added a class to hold structs
          int Partition(AllClientData* clientBalance, int lowIndex, int highIndex, SortTracker& tracker, bool isAscending);
          void QuickSort(AllClientData* clients, int lowIndex, int highIndex, SortTracker& tracker, bool isAscending);
     };
+
+    class RecentClientList {
+        public:
+        struct Node {
+        
+        }
+    }
     #endif
