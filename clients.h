@@ -87,13 +87,14 @@ class Clients { //here I added a class to hold structs
         
         Clients();
         ~Clients();
-
+        
         void sortClients();
         void loadfile();
         void search();
         void fullprint() const;
         void addClient();
         void removeClient();
+        void restoreClient();
 
         private: 
          AllClientData* clientFile;
@@ -104,10 +105,45 @@ class Clients { //here I added a class to hold structs
          void QuickSort(AllClientData* clients, int lowIndex, int highIndex, SortTracker& tracker, bool isAscending);
     };
 
-    class TrashBinList { //singly linked list to implement a trash bin.
+    class SinglyLinkedNode { //singly linked list to implement a trash bin.
         public:
         struct Node {
+            Clients::AllClientData clientInfo;
+            Node* next;
+            
+            Node(const Clients::AllClientData& data) {
+                clientInfo = data;
+                next = nullptr;
+            }
+        };
         
-        }
-    }
+        class TrashList {
+            private:
+            Node* head;
+            Node* tail;
+
+            public:
+            TrashList() {
+                head = nullptr;
+                tail = nullptr;
+            }
+
+            ~TrashList() {
+                Node* current = head;
+                while (current) {
+                    Node* temp = current;
+                    current = current->next;
+                    delete temp;
+                }
+            }
+            //functions I will create in clients.cpp
+            void Append(const Clients::AllClientData& deletedClient);
+            void Prepend(const Clients::AllClientData& deletedClient);
+            bool Search (int id) const;
+            bool Remove(int id);
+            bool Restore(Clients& clients, int id);
+            void PrintDeletedClients();
+        };
+    };
+    
     #endif
