@@ -104,7 +104,7 @@ class Clients { //here I added a class to hold structs
          void QuickSort(AllClientData* clients, int lowIndex, int highIndex, SortTracker& tracker, bool isAscending);
     };
 
-    class RecentClientList {
+    class TrashBinList { //singly linked list to implement a trash bin.
         public:
         struct Node {
         
