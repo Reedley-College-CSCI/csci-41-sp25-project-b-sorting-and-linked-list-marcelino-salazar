@@ -271,4 +271,16 @@ void Clients::removeClient() {
     } else {
         cout << "Error: Could not update the file after removing the client" << endl;
     }
+};
+//creating function to append deleted clients to the end of the list
+void SinglyLinkedNode::TrashList::Append(const Clients::AllClientData& deletedClient) {
+    Node* newNode = new Node(deletedClient);
+    
+    if (!head) {
+        head = newNode;
+        tail = newNode;
+    } else {
+        tail->next = newNode;
+        tail = newNode;
+    }
 }
