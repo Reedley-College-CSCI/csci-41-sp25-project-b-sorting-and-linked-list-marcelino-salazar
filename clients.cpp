@@ -284,3 +284,17 @@ void SinglyLinkedNode::TrashList::Append(const Clients::AllClientData& deletedCl
         tail = newNode;
     }
 }
+
+//this function will prepend a deleted client to the beginning of the list.
+void SinglyLinkedNode::TrashList::Prepend(const Clients::AllClientData& deletedClient) {
+    Node* newNode = new Node(deletedClient);
+    
+    if (!head) {
+        head = newNode;
+        tail = newNode;
+    }
+    else {
+        newNode->next = head;
+        head = newNode;
+    }
+}
